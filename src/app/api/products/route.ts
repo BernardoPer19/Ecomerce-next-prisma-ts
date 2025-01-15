@@ -1,7 +1,6 @@
 import prisma from "@/utils/prisma";
 import { NextResponse } from "next/server";
 
-// GET para obtener todos los productos
 export async function GET() {
   try {
     const products = await prisma.product.findMany();
@@ -14,12 +13,10 @@ export async function GET() {
   }
 }
 
-// POST para crear un nuevo producto
 export async function POST(request: Request) {
   try {
     const { name, description, img, price } = await request.json();
 
-    // Validación del campo 'name'
     if (!name) {
       return NextResponse.json(
         { error: "El campo 'name' es obligatorio." },
@@ -27,7 +24,8 @@ export async function POST(request: Request) {
       );
     }
 
-    if (typeof price !== 'number' || isNaN(price) || price <= 0) {
+    const parsedPrice = parseFloat(price);
+    if (isNaN(parsedPrice) || parsedPrice <= 0) {
       return NextResponse.json(
         { error: "El campo 'price' debe ser un número válido mayor a 0." },
         { status: 400 }
@@ -39,7 +37,7 @@ export async function POST(request: Request) {
         name,
         description,
         img,
-        price,
+        price: parsedPrice, 
       },
     });
 

@@ -16,5 +16,5 @@ model Product {
   name String
   description String
   img String
-  price Int
+  price Float
 }

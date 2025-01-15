@@ -1,6 +1,13 @@
+import Cart from "@/components/cart/Cart";
+import CartToggleButton from "@/components/cart/ToggleButton";
+import ProductList from "@/components/ProductList";
 
 export default function Home() {
   return (
-   <h1>Page 1</h1>
+   <>
+   <CartToggleButton/>
+   <Cart/>
+   <ProductList/>
+   </>
   );
 }

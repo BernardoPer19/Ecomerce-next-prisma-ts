@@ -1,14 +1,12 @@
 import prisma from "@/utils/prisma";
 import { NextResponse } from "next/server";
 
-// Definimos los parámetros de la URL (en este caso el ID)
 interface Params {
   params: { id: string };
 }
 
 export async function GET(request: Request, { params }: Params) {
   try {
-    // Asegúrate de que params.id sea un número
     const product = await prisma.product.findUnique({
       where: {
         id: Number(params.id),
